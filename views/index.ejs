@@ -1,0 +1,37 @@
+<% title = "Home" %>
+
+<section class="filters">
+  <div class="sort-types">Sort:
+    <a href="/?sort=recent">Newest</a> |
+    <a href="/?sort=oldest">Oldest</a> |
+    <a href="/?sort=likes">Most liked</a>
+  </div>
+
+  
+  <div>Popular tags:</div>
+  <div class="tags-list">
+    <% for(const t of popularTags) { %>
+      <button href="/tag/<%=encodeURIComponent(t.name)%>"><%=t.name%> (<%=t.cnt%>)</button>
+    <% } %>
+  </div>
+</section>
+
+<section class="grid">
+  <% for(const p of posts) { %>
+    <article class="card">
+      <a href="/post/<%=p.id%>">
+        <img src="/uploads/<%=p.filename%>" alt="post" />
+      </a>
+    </article>
+  <% } %>
+</section>
+
+<section class="pagination">
+  <% for(let i=1;i<=totalPages;i++){ %>
+    <% if(i===page){ %>
+      <strong><%=i%></strong>
+    <% } else { %>
+      <a href="/?page=<%=i%>"><%=i%></a>
+    <% } %>
+  <% } %>
+</section>

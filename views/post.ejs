@@ -1,0 +1,62 @@
+
+<% title = 'Post '+post.id %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<article class="post-view">
+  <img src="/uploads/<%=post.filename%>" alt="full" class="full"/>
+  <div class="post-meta">
+    <div>By <a class="username-button" href="/user/<%=post.user_id%>"><%=post.username%></a></div>
+    <div>Posted <%=new Date(post.created_at).toLocaleString()%></div>
+    <div class="tags">
+      <% for(const t of post.tags) { %>
+        <a class="tag" href="/tag/<%=encodeURIComponent(t)%>"><%=t%></a>
+      <% } %>
+    </div>
+
+<div class="actions">
+  <!-- Like button -->
+  <i id="like-btn" class="fa-solid fa-heart <%= liked ? 'liked' : '' %>"></i>
+  <span id="likes-count"><%= likes %></span>
+
+  <!-- Favorite button -->
+  <i id="fav-btn" class="fa-solid fa-star <%= favorited ? 'favorited' : '' %>"></i>
+
+  <% if (user && user.id === post.user_id) { %>
+    <a class="edit-button" href="/post/<%=post.id%>/edit">Edit tags</a>
+    <form method="POST" action="/post/<%=post.id%>/delete" style="display:inline">
+      <button class ="delete-button" type="submit">Delete</button>
+    </form>
+  <% } %>
+</div>
+
+
+
+
+
+  </div>
+</article>
+
+<script>
+  // grab the icons
+  const likeBtn = document.getElementById('like-btn');
+  const favBtn = document.getElementById('fav-btn');
+
+  // like button click
+  likeBtn?.addEventListener('click', async () => {
+    const res = await fetch('/post/<%=post.id%>/like', { method: 'POST' });
+    const j = await res.json();
+    document.getElementById('likes-count').textContent = j.likes;
+    likeBtn.classList.toggle('liked'); // toggles red heart
+  });
+
+  // favorite button click
+  favBtn?.addEventListener('click', async () => {
+    const res = await fetch('/post/<%=post.id%>/fav', { method: 'POST' });
+    if(res.ok) {
+      favBtn.classList.toggle('favorited'); // toggles yellow star
+    }
+  });
+</script>
+

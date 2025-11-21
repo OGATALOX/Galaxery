@@ -1,0 +1,42 @@
+<% const edit = typeof isEdit !== 'undefined' ? isEdit : false; %>
+<% const title = edit ? 'Edit Post' : 'Upload'; %>
+<h2><%= title %></h2>
+
+<% let formAction = edit ? ('/post/' + post.id + '/edit') : '/upload'; %>
+<form 
+  action="<%= formAction %>" 
+  method="POST"
+  <% if (!edit) { %> enctype="multipart/form-data" <% } %>
+>
+
+
+
+
+
+  <!-- Image preview if editing -->
+  <% if (isEdit) { %>
+    <div>
+      <label>Current Image:</label>
+      <div>
+        <img src="/uploads/<%= post.filename %>" alt="Post Image" style="max-width:300px;">
+      </div>
+    </div>
+  <% } else { %>
+    <div>
+      <label>Select Image:
+        <input class ="select-image-btn" type="file" name="image" required>
+      </label>
+    </div>
+  <% } %>
+
+  <!-- Tags input -->
+  <div>
+    <label>Tags (use #):
+      <input type="text" name="tags" value="<%= tags ? tags.join(' ') : '' %>" placeholder="#nature #cloudy" required>
+    </label>
+  </div>
+
+  <div>
+    <button class="save-upload-button" type="submit"><%= isEdit ? 'Save Changes' : 'Upload Image' %></button>
+  </div>
+</form>

@@ -1,0 +1,12 @@
+
+<% title = 'Register' %>
+
+<h2>Register</h2>
+<% if (typeof error !== 'undefined') { %>
+  <div class="error"><%=error%></div>
+<% } %>
+<form method="POST">
+  <div><input name="username" placeholder="username" required></div>
+  <div><input name="password" type="password" placeholder="password" required></div>
+  <div><button>Register</button></div>
+</form>

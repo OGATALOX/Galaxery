@@ -1,0 +1,11 @@
+
+<% title = user.username + "'s page" %>
+
+<h2><%=user.username%></h2>
+<section class="grid">
+  <% for(const p of posts) { %>
+    <article class="card">
+      <a href="/post/<%=p.id%>"><img src="/uploads/<%=p.filename%>" /></a>
+    </article>
+  <% } %>
+</section>

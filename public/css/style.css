@@ -1,0 +1,335 @@
+/* public/css/style.css - Dark Cosmic Theme for Galaxery */
+
+/* --- Base --- */
+body {
+  font-family:cursive;
+  margin: 0;
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+/* --- Header --- */
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  background: #111111;
+  border-bottom: 1px solid #333;
+}
+
+/* Brand */
+.brand a {
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+/* --- Search --- */
+.search {
+  position: relative;
+  flex: 1;
+}
+
+.search input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #222;
+  border: 1px solid #444;
+  color: #FFFFFF;
+}
+
+.autocomplete {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  background: #111;
+  border: 1px solid #444;
+  z-index: 50;
+}
+
+.autocomplete .ac-item {
+  padding: 6px 8px;
+  cursor: pointer;
+  color: #FFF;
+}
+
+.autocomplete .ac-item:hover {
+  background: #222;
+}
+
+/* --- Nav --- */
+nav a {
+  margin-left: 8px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+nav a:hover {
+  color: #FF6EC7; /* neon pink on hover */
+}
+
+/* --- Main / Grid --- */
+main {
+  padding: 18px;
+}
+
+.grid {
+  column-count: 6;        /* number of columns */
+  column-gap: 12px;       /* spacing between columns */
+}
+
+.card {
+  break-inside: avoid;    /* prevents cards from breaking across columns */
+  margin-bottom: 12px;    /* spacing between cards vertically */
+  background: #222;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;            /* scale to fit column width */
+  height: auto;
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Tags --- */
+.tag {
+  display: inline-block;
+  margin: 3px 4px;
+  padding: 3px 6px;
+  background: #222;
+  text-decoration: none;
+  color: #00FFFF; /* neon cyan */
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.tag:hover {
+  color: #FF6EC7; /* neon pink */
+}
+
+/* --- Post View --- */
+.post-view {
+  display: flex;
+  gap: 16px;
+}
+
+.post-view img.full {
+  max-width: 60%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.post-meta {
+  max-width: 40%;
+}
+
+/* --- Filters & Pagination --- */
+.filters {
+  margin-bottom: 12px;
+}
+
+.pagination {
+  margin-top: 12px;
+}
+
+/* --- Errors --- */
+.error {
+  color: crimson;
+}
+
+/* --- Actions --- */
+.actions i {
+  font-size: 36px;
+  cursor: pointer;
+  color: grey;       /* default state */
+  transition: color 0.05s ease, transform 0.2s ease;
+  margin-right: 10px;
+}
+
+.actions i.liked {
+  color: red;
+}
+
+.actions i.favorited {
+  color: gold;
+}
+
+.actions i:hover {
+  transform: scale(1.2);
+}
+
+/* --- Buttons --- */
+.delete-button {
+  background: linear-gradient(45deg, #ff3c00, #ff7300);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+button:hover, .button:hover {
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+
+/* --- Forms --- */
+input, textarea, select {
+  background-color: #222;
+  color: #FFFFFF;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #888888;
+}
+
+/* Top nav buttons (Upload, Favorites, My Posts, Logout, etc.) */
+header nav a {
+    color: white;                 /* Text white */
+    background: linear-gradient(45deg, #9B59B6, #3498DB);          /* Button background */
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    margin-left: 8px;
+}
+
+/* Fix hover color */
+header nav a:hover,
+header nav a:focus,
+header nav a:active,
+header nav a:visited {
+    color: white;                 /* Keep text white in all states */
+    background: #3399ff;          /* Lighter blue on hover/focus/active */
+}
+
+/* Post card meta - username and edit link */
+.card-info .meta a {
+    color: white;                 /* Normal text color */
+    text-decoration: none;
+}
+
+/* Remove visited purple */
+.card-info .meta a:link,
+.card-info .meta a:visited {
+    color: white;
+}
+
+/* Hover effect for edit link */
+.card-info .meta a.edit:hover,
+.card-info .meta a.edit:focus,
+.card-info .meta a.edit:active {
+    background: #3399ff;
+    color: white;
+}
+
+
+.tags-list button {
+  background-color: #333;  /* dark grey background */
+  color: #fff;             /* white text */
+  border: none;            /* remove default button border */
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.tags-list button:hover {
+  background-color: #555;  /* slightly lighter grey on hover */
+}
+
+
+.sort-types button {
+
+
+   color: white;                 /* Text white */
+    background: linear-gradient(45deg, #9B59B6, #3498DB);          /* Button background */
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    margin-left: 8px;
+}
+
+.sort-types a {
+    color: white;                 /* Text white */
+    background: linear-gradient(45deg, #9B59B6, #3498DB);          /* Button background */
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    margin-left: 8px;
+}
+
+.sort-types {
+    margin-bottom: 15px;
+}
+
+
+.select-image-btn {
+    color: white;                 /* Text white */
+    background: linear-gradient(45deg, #3d4042, #a27cb1);          /* Button background */
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    margin-left: 8px;
+}
+
+.save-upload-button {
+     color: rgb(0, 0, 0);   
+     font-weight: bold;              /* Text white */
+    background: linear-gradient(45deg, #4affab, #93f8ff);          /* Button background */
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.save-upload-button:hover {
+transform: scale(1.1);
+transition: all 0.3s ease;
+}
+
+.upload-nav-button {
+    background: linear-gradient(45deg, #4affab, #93f8ff); 
+    color: #000000 !important;
+}
+
+.username-button {
+
+    color: #ff00d4 !important;
+}
+
+.edit-button {
+
+    color: #ff0080 !important;
+}
