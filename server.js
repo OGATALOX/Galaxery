@@ -11,6 +11,16 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(session);
 
+const cloudinary = require('cloudinary').v2;
+
+// configure using environment variables
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+
 // --- MONGODB (Atlas) ---
 const mongoose = require("mongoose");
 
@@ -31,7 +41,7 @@ app.use(expressLayouts);
 app.set('layout', 'layout');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // ensure uploads folder exists
@@ -245,16 +255,24 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 
   const tags = parseTags(req.body.tags || '');
   const created_at = Date.now();
-  const result = await run('INSERT INTO posts(user_id, filename, created_at) VALUES(?,?,?)', [req.session.user.id, req.file.filename, created_at]);
-  const postId = result.lastID;
-  console.log('POST body:', req.body);
 
+  // --- Upload to Cloudinary ---
+  const result = await cloudinary.uploader.upload(req.file.path, {
+    folder: 'galaxery', // optional folder name
+  });
+
+  // result.url contains the permanent image URL
+  const filename = result.secure_url;
+
+  const dbResult = await run('INSERT INTO posts(user_id, filename, created_at) VALUES(?,?,?)', [req.session.user.id, filename, created_at]);
+  const postId = dbResult.lastID;
 
   const tagIds = await ensureTagIds(tags);
   await attachTagsToPost(postId, tagIds);
 
   res.redirect(`/post/${postId}`);
 });
+
 
 app.get('/post/:id/edit', async (req, res) => {
   if (!req.session.user) return res.redirect('/login');
